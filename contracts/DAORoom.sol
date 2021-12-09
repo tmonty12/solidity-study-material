@@ -1,6 +1,10 @@
 //SPDX-License-Identifier: GPL-3.0-only
 pragma solidity ^0.8.0;
 
+/**
+ * @author Thomas Montfort
+ * @title A simple DAO room
+ */
 contract DAORoom {
 
     address payable public owner;
@@ -24,7 +28,10 @@ contract DAORoom {
         _;
     }
 
-    function rent() external payable public onlyWhenVacant {
+    /**
+     * @dev rents out the room to msg.sender
+     */
+    function rent() external payable onlyWhenVacant {
         require(msg.value != cost, "Insufficient funds");
         owner.transfer(msg.value);
         emit Occupied(msg.sender);
